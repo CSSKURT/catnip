@@ -336,8 +336,7 @@ input[type="date"] {
 
 /* Feed Button and Modal */
 .feed-container {
-    position: relative;
-    display: inline-block;
+    margin-top: 20px;
 }
 
 .feed-btn {
@@ -346,35 +345,59 @@ input[type="date"] {
 }
 
 .feed-modal {
-    display: none;
     position: absolute;
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
     background: white;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.15);
-    width: 200px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     z-index: 1000;
+    min-width: 300px;
     margin-top: 10px;
 }
 
-.feed-modal .form-group {
-    margin-bottom: 10px;
+.feed-modal .modal-content {
+    border: none;
+    box-shadow: none;
 }
 
-.feed-modal input {
+.feed-modal .modal-header {
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 10px;
+}
+
+.feed-modal .modal-body {
+    padding: 15px 0;
+}
+
+.feed-modal .modal-footer {
+    border-top: 1px solid #dee2e6;
+    padding-top: 10px;
+}
+
+.feed-modal .close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.feed-modal .form-group {
+    margin-bottom: 0;
+}
+
+.feed-modal .feed-amount {
     width: 100%;
     padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 14px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
 }
 
 .feed-modal .btn {
-    width: 100%;
-    padding: 8px;
+    margin-left: 5px;
 }
 
 /* Set Goal Modal */
@@ -581,4 +604,418 @@ header {
     font-size: 14px;
     color: #666;
 }
+
+.prediction-container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 25px;
+    margin: 30px auto;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    max-width: 1200px;
+    min-height: 500px;
+}
+
+#graph {
+    position: relative;
+    height: 450px;
+    margin: 20px 0;
+}
+
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.nav-tabs .nav-link {
+    color: #666;
+    border: none;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+}
+
+.nav-tabs .nav-link.active {
+    color: #FF5722;
+    border-bottom: 2px solid #FF5722;
+    background: none;
+}
+
+#predictionsList .list-group-item {
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+#predictionsList .list-group-item:hover {
+    background-color: #e9ecef;
+    transform: translateX(5px);
+}
+
+#predictionsList .badge {
+    background-color: #FF5722;
+    font-size: 14px;
+    padding: 8px 12px;
+}
+
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+
+/* Calculator Styles */
+.calculator-card {
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.calculator-card .card-body {
+    padding: 20px;
+}
+
+.calculator-table {
+    margin-top: 10px;
+}
+
+.calculator-form-group {
+    margin-bottom: 15px;
+}
+
+.calculator-submit-btn {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.calculator-alert {
+    margin-bottom: 20px;
+}
+
+/* Calculator Table Styles */
+.calculator-table {
+    margin-top: 10px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.calculator-table table {
+    margin-bottom: 0;
+}
+
+.calculator-table th,
+.calculator-table td {
+    padding: 15px;
+    vertical-align: middle;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.calculator-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #333;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.calculator-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Calculator Action Buttons */
+.calculator-action-btn {
+    padding: 8px 12px;
+    margin: 0 4px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+}
+
+.calculator-action-btn i {
+    font-size: 16px;
+}
+
+.calculator-action-btn:hover {
+    transform: scale(1.1);
+}
+
+.edit-btn {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.edit-btn:hover {
+    background-color: #e0a800;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* Modal sizing for calculator */
+.modal-wrapper {
+    width: 90%;
+    max-width: 1200px;
+    height: 90vh;
+    max-height: 90vh;
+}
+
+.modal-content {
+    height: 100%;
+    max-height: 90vh;
+    overflow: hidden;
+}
+
+.calculator-card {
+    height: 100%;
+    margin-bottom: 0;
+}
+
+.calculator-card .card-body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.calculator-card .table-responsive {
+    flex: 1;
+    overflow: auto;
+}
+
+/* Responsive adjustments for calculator */
+@media (max-width: 768px) {
+    .calculator-table th,
+    .calculator-table td {
+        padding: 10px;
+        font-size: 13px;
+    }
+    
+    .calculator-action-btn {
+        padding: 6px 10px;
+        width: 30px;
+        height: 30px;
+    }
+    
+    .calculator-action-btn i {
+        font-size: 14px;
+    }
+}
+
+/* Calculator Modal Styles */
+#calculateSavingsModal .modal-dialog {
+    max-width: 90%;
+    width: 1200px;
+    margin: 2rem auto;
+}
+
+#calculateSavingsModal .modal-content {
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+#calculateSavingsModal .modal-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+#calculateSavingsModal .modal-body {
+    padding: 2rem;
+}
+
+#calculateSavingsModal .modal-footer {
+    padding: 1.5rem;
+    border-top: 1px solid #dee2e6;
+}
+
+/* Calculator Form Styles */
+.calculator-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+.calculator-card .card-body {
+    padding: 2rem;
+}
+
+.calculator-form-group {
+    margin-bottom: 1.5rem;
+}
+
+.calculator-form-group label {
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.calculator-form-group input {
+    padding: 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.calculator-form-group input:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+/* Calculator Table Styles */
+.calculator-table {
+    margin-top: 2rem;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.calculator-table table {
+    margin-bottom: 0;
+}
+
+.calculator-table th {
+    background: #f8f9fa;
+    padding: 1rem;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.calculator-table td {
+    padding: 1rem;
+    vertical-align: middle;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.calculator-table tr:last-child td {
+    border-bottom: none;
+}
+
+.calculator-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Calculator Action Buttons */
+.calculator-action-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin: 0 4px;
+}
+
+.calculator-action-btn i {
+    font-size: 1rem;
+}
+
+.edit-btn {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.clear-btn {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.submit-btn {
+    background-color: #28a745;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    width: auto;
+}
+
+.edit-btn:hover {
+    background-color: #e0a800;
+    transform: translateY(-2px);
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+}
+
+.clear-btn:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+
+.submit-btn:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+/* Calculator Alert Styles */
+.calculator-alert {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #calculateSavingsModal .modal-dialog {
+        margin: 1rem;
+        width: auto;
+    }
+    
+    #calculateSavingsModal .modal-body {
+        padding: 1rem;
+    }
+    
+    .calculator-table th,
+    .calculator-table td {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+    
+    .calculator-action-btn {
+        width: 35px;
+        height: 35px;
+    }
 }

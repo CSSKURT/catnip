@@ -25,44 +25,55 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (submitFeed) {
         submitFeed.addEventListener('click', function() {
-            const amount = document.querySelector('.feed-amount').value;
-            if (amount) {
-                fetch('add_money.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        amount: amount,
-                        description: 'Feed'
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        const percentage = (data.current_amount / data.target_amount) * 100;
-                        
-                        // Update all displays
-                        document.getElementById('goalCurrent').textContent = formatMoney(data.current_amount);
-                        document.getElementById('goalProgress').textContent = percentage.toFixed(1);
-                        
-                        // Update progress bar and text
-                        updateProgressBar(percentage, data.current_amount, data.target_amount);
-                        
-                        // Update cat stage
-                        updateCatStage(percentage);
-                        
-                        // Update money history
-                        updateMoneyHistory();
-                        
-                        // Reset and close feed modal
-                        feedModal.style.display = 'none';
-                        document.querySelector('.feed-amount').value = '';
-                        
-                        showToast('Successfully added money!');
-                    }
-                });
+            const amountInput = document.querySelector('.feed-amount');
+            const amount = amountInput.value;
+            
+            if (!amount || isNaN(amount) || amount <= 0) {
+                showToast('Please enter a valid amount', 'error');
+                return;
             }
+
+            fetch('/catnip/transactions/add_money.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    amount: parseFloat(amount),
+                    description: 'Feed'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const percentage = (data.current_amount / data.target_amount) * 100;
+                    
+                    // Update all displays
+                    document.getElementById('goalCurrent').textContent = formatMoney(data.current_amount);
+                    document.getElementById('goalProgress').textContent = percentage.toFixed(1);
+                    
+                    // Update progress bar and text
+                    updateProgressBar(percentage, data.current_amount, data.target_amount);
+                    
+                    // Update cat stage
+                    updateCatStage(percentage);
+                    
+                    // Update money history
+                    updateMoneyHistory();
+                    
+                    // Reset and close feed modal
+                    feedModal.style.display = 'none';
+                    amountInput.value = '';
+                    
+                    showToast('Successfully added money!');
+                } else {
+                    showToast(data.error || 'Failed to add money', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showToast('An error occurred while adding money', 'error');
+            });
         });
     }
 
@@ -122,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
             deadline: document.getElementById('newDeadline').value
         };
 
-        fetch('update_goal.php', {
+        fetch('/catnip/user_actions/update_goal.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -164,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const startOverBtn = document.getElementById('confirmStartOver');
     if (startOverBtn) {
         startOverBtn.addEventListener('click', function() {
-            fetch('reset_user.php', {
+            fetch('/catnip/user_actions/reset_user.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -247,7 +258,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function updateMoneyHistory() {
-        fetch('get_money_history.php')
+        fetch('/catnip/transactions/get_money_history.php')
             .then(response => response.json())
             .then(data => {
                 const historyList = document.querySelector('.money-history .list-group');
